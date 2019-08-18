@@ -1,12 +1,10 @@
 "==========================================
-" ProjectLink: https://github.com/wklken/vim-for-server
-" Author:  wklken
-" Version: 0.2
-" Email: wklken@yeah.net
-" BlogPost: http://www.wklken.me
-" Donation: http://www.wklken.me/pages/donation.html
+" ProjectLink: https://https://github.com/zhangjieke/vim-for-server
+" Author:  jieke
+" Version: 0.1
+" ForkedFrom: wklken/vim-for-server
 " ReadMe: README.md
-" Last_modify: 2015-07-07
+" Last_modify: 2019-08-18
 " Desc: simple vim config for server, without any plugins.
 "==========================================
 
@@ -82,20 +80,20 @@ set softtabstop=4                " insert mode tab and backspace use 4 spaces
 
 " NOT SUPPORT
 " fold
-set foldenable
-set foldmethod=indent
-set foldlevel=99
-let g:FoldMethod = 0
-map <leader>zz :call ToggleFold()<cr>
-fun! ToggleFold()
-    if g:FoldMethod == 0
-        exe "normal! zM"
-        let g:FoldMethod = 1
-    else
-        exe "normal! zR"
-        let g:FoldMethod = 0
-    endif
-endfun
+" set foldenable
+" set foldmethod=indent
+" set foldlevel=99
+" let g:FoldMethod = 0
+" map <leader>zz :call ToggleFold()<cr>
+" fun! ToggleFold()
+"     if g:FoldMethod == 0
+"         exe "normal! zM"
+"         let g:FoldMethod = 1
+"     else
+"         exe "normal! zR"
+"         let g:FoldMethod = 0
+"     endif
+" endfun
 
 " encoding
 set encoding=utf-8
@@ -240,7 +238,7 @@ map Y y$
 
 "Map ; to : and save a million keystrokes
 " ex mode commands made easy 用于快速进入命令行
-nnoremap ; :
+" nnoremap ; :
 
 " Shift+H goto head of the line, Shift+L goto end of the line
 nnoremap H ^
@@ -254,3 +252,13 @@ cnoremap <C-j> <t_kd>
 cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
+" show modified before save, 编辑文件未保存时查看修改内容  :DiffSaved
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
