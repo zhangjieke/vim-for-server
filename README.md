@@ -5,7 +5,7 @@ vim-for-server
 
 # Introduction
 
-This repository is a forked version of [k-vim](https://github.com/wklken/vim-for-server)
+This repository is a forked version of [k-vim-for-server](https://github.com/wklken/vim-for-server)
 
 Just do some persional config.
 
